@@ -71,7 +71,8 @@ echo -e $b"➤ "$w" extracting rule_provider: "$g"rule"$w
 unzip rule_provider.zip
 echo ""
 
-
+sleep 2
+cd ClashForTermux
 sleep 2
 rm -r -f yacd-gh-pages.zip
 sleep 2
