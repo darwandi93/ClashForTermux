@@ -36,7 +36,7 @@ proxy-providers:
       enable: false
       url: http://www.gstatic.com/generate_204
       interval: 300
-      
+
 #Gunakan tanda pagar menghiden, jika salah satu server tidak kepakai
 proxy-groups:
 - name: UNIVERSAL
@@ -69,7 +69,7 @@ proxy-groups:
   interval: '300'
   tolerance: '50'
   use:
-    - vmess
+    - Vmess
     - Trojan 
 rules:
 - DST-PORT,7895,REJECT
@@ -111,19 +111,16 @@ rules:
 - DST-PORT,5228,AKRAB
 - DST-PORT,5222,AKRAB
 - DST-PORT,38211,AKRAB
-
   # > MICROSOFT,AKRAB
 - DOMAIN-SUFFIX,smartscreen-prod.microsoft.com,AKRAB
 - DOMAIN-SUFFIX,self.events.data.microsoft.com,AKRAB
 - DOMAIN-SUFFIX,nav.smartscreen.microsoft.com,AKRAB
 - DOMAIN-SUFFIX,edge.microsoft.com,AKRAB
-  
   # > RUANGGURU,AKRAB
 - DOMAIN-SUFFIX,ruangguru.com,AKRAB
 - DOMAIN-SUFFIX,belajar.ruangguru.com,AKRAB
 - DOMAIN-SUFFIX,midtrans.com,AKRAB
 - DOMAIN-SUFFIX,api.midtrans.com,AKRAB
-  
   # > ZOOM,AKRAB
 - DOMAIN-SUFFIX,zoom.us,AKRAB
 - DOMAIN-SUFFIX,google.zoom.us,AKRAB
@@ -153,14 +150,12 @@ rules:
 - DST-PORT,8802,AKRAB
 - DST-PORT,3478,AKRAB
 - DST-PORT,3479,AKRAB
- 
   # > AREA KHUSUS XL AKRAB
 
   # > GOOGLE MEET, CLASSROOM, HANGOUTS, MAPS,AKRAB
 - DOMAIN-SUFFIX,meetings.googleapis.com,AKRAB
 - DOMAIN-SUFFIX,classroom.google.com,AKRAB
 - DOMAIN-SUFFIX,hangouts.googleapis.com,AKRAB
-
   # MAPS,AKRAB
 - DOMAIN-SUFFIX,userlocation.googleapis.com,AKRAB
 - DOMAIN-SUFFIX,stun.l.google.com,AKRAB
@@ -181,7 +176,6 @@ rules:
 - DOMAIN-SUFFIX,maps.gstatic.com,AKRAB
 - DOMAIN-SUFFIX,maps.google.com,AKRAB
 - DOMAIN-SUFFIX,optimizationguide-pa.googleapis.com,AKRAB
-
   # CLASSROOM,AKRAB
 - DOMAIN-SUFFIX,dns.google,AKRAB
 - DOMAIN-SUFFIX,clients3.google.com,AKRAB
@@ -189,13 +183,11 @@ rules:
   # PORTS,AKRAB
 - DST-PORT,19302,AKRAB
 - DST-PORT,19305,AKRAB
-
   # > Microsoft Teams,AKRAB
 - DOMAIN,teams.events.data.microsoft.com,AKRAB
 - DOMAIN-SUFFIX,teams.cdn.live.net,AKRAB
 - DOMAIN-SUFFIX,teams.live.com,AKRAB
 - DOMAIN-SUFFIX,teams.microsoft.com,AKRAB
-
   # > Campuran,AKRAB
 - DOMAIN-KEYWORD,zoom.us,AKRAB
 - DOMAIN-KEYWORD,meet.google.com,AKRAB
@@ -218,4 +210,3 @@ rules:
 - DOMAIN-KEYWORD,office.com,AKRAB
 - DOMAIN-KEYWORD,officeppe.com,AKRAB
 - MATCH,GLOBAL
-
