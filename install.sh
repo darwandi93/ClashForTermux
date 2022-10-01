@@ -34,14 +34,14 @@ echo ""
 
 sleep 2
 
-echo -e $b"➤ "$w" coppying vmess.yaml: "$g"vmess"$w
-cp -r -f vmess.yaml $HOME/.config/clash
+echo -e $b"➤ "$w" coppying proxy_provider: "$g"proxy"$w
+cp -r -f proxy_provider.zip $HOME/.config/clash
 echo ""
 
 sleep 2
 
-echo -e $b"➤ "$w" coppying trojan.yaml: "$g"trojan"$w
-cp -r -f trojan.yaml $HOME/.config/clash
+echo -e $b"➤ "$w" coppying rule_provider: "$g"rule"$w
+cp -r -f rule_provider.zip $HOME/.config/clash
 echo ""
 
 sleep 2
@@ -58,7 +58,26 @@ unzip yacd-gh-pages.zip
 echo ""
 
 sleep 2
+
+cd $HOME/.config/clash
+echo -e $b"➤ "$w" extracting proxy_provider: "$g"proxy"$w
+unzip proxy_provider.zip
+echo ""
+
+sleep 2
+
+cd $HOME/.config/clash
+echo -e $b"➤ "$w" extracting rule_provider: "$g"rule"$w
+unzip rule_provider.zip
+echo ""
+
+
+sleep 2
 rm -r -f yacd-gh-pages.zip
+sleep 2
+rm -r -f proxy_provider.zip
+sleep 2
+rm -r -f rule_provider.zip
 sleep 2
 cd
 rm -r -f ClashForTermux
