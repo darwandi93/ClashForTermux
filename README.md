@@ -45,9 +45,11 @@
 -   skip-cert-verify: true
     
 # Running Clash
+
 - Sebelum di running dahulukan lah, edit config
 - Command :
-
+- start Clash
+- clash ----> enter untuk menjalankan
 - vmess
 - nano .config/clash/proxy_provider/vmess.yaml
 
