@@ -61,7 +61,7 @@ proxy-groups:
   interval: '300'
   use:
     - Vmess
-   #- Trojan 
+    - Trojan 
 - name: BEST-PING
   type: url-test
   disable-udp: false
@@ -70,7 +70,7 @@ proxy-groups:
   tolerance: '50'
   use:
     - vmess
-  #- Trojan 
+    - Trojan 
 rules:
 - DST-PORT,7895,REJECT
 - DST-PORT,7892,REJECT
@@ -110,19 +110,19 @@ rules:
 - IP-CIDR,75.126.150.0/16,AKRAB
 - DST-PORT,5228,AKRAB
 - DST-PORT,5222,AKRAB
-- DST-PORT,38211
+- DST-PORT,38211,AKRAB
 
   # > MICROSOFT,AKRAB
 - DOMAIN-SUFFIX,smartscreen-prod.microsoft.com,AKRAB
 - DOMAIN-SUFFIX,self.events.data.microsoft.com,AKRAB
 - DOMAIN-SUFFIX,nav.smartscreen.microsoft.com,AKRAB
-- DOMAIN-SUFFIX,edge.microsoft.com
+- DOMAIN-SUFFIX,edge.microsoft.com,AKRAB
   
   # > RUANGGURU,AKRAB
 - DOMAIN-SUFFIX,ruangguru.com,AKRAB
 - DOMAIN-SUFFIX,belajar.ruangguru.com,AKRAB
 - DOMAIN-SUFFIX,midtrans.com,AKRAB
-- DOMAIN-SUFFIX,api.midtrans.com
+- DOMAIN-SUFFIX,api.midtrans.com,AKRAB
   
   # > ZOOM,AKRAB
 - DOMAIN-SUFFIX,zoom.us,AKRAB
@@ -152,14 +152,14 @@ rules:
 - DST-PORT,8801,AKRAB
 - DST-PORT,8802,AKRAB
 - DST-PORT,3478,AKRAB
-- DST-PORT,3479
+- DST-PORT,3479,AKRAB
  
   # > AREA KHUSUS XL AKRAB
 
   # > GOOGLE MEET, CLASSROOM, HANGOUTS, MAPS,AKRAB
 - DOMAIN-SUFFIX,meetings.googleapis.com,AKRAB
 - DOMAIN-SUFFIX,classroom.google.com,AKRAB
-- DOMAIN-SUFFIX,hangouts.googleapis.com
+- DOMAIN-SUFFIX,hangouts.googleapis.com,AKRAB
 
   # MAPS,AKRAB
 - DOMAIN-SUFFIX,userlocation.googleapis.com,AKRAB
@@ -180,21 +180,21 @@ rules:
 - DOMAIN-SUFFIX,streetviewpixels-pa.googleapis.com,AKRAB
 - DOMAIN-SUFFIX,maps.gstatic.com,AKRAB
 - DOMAIN-SUFFIX,maps.google.com,AKRAB
-- DOMAIN-SUFFIX,optimizationguide-pa.googleapis.com
+- DOMAIN-SUFFIX,optimizationguide-pa.googleapis.com,AKRAB
 
   # CLASSROOM,AKRAB
 - DOMAIN-SUFFIX,dns.google,AKRAB
 - DOMAIN-SUFFIX,clients3.google.com,AKRAB
-- DOMAIN-SUFFIX,notifications-pa.googleapis.com
+- DOMAIN-SUFFIX,notifications-pa.googleapis.com,AKRAB
   # PORTS,AKRAB
 - DST-PORT,19302,AKRAB
-- DST-PORT,19305
+- DST-PORT,19305,AKRAB
 
   # > Microsoft Teams,AKRAB
 - DOMAIN,teams.events.data.microsoft.com,AKRAB
 - DOMAIN-SUFFIX,teams.cdn.live.net,AKRAB
 - DOMAIN-SUFFIX,teams.live.com,AKRAB
-- DOMAIN-SUFFIX,teams.microsoft.com
+- DOMAIN-SUFFIX,teams.microsoft.com,AKRAB
 
   # > Campuran,AKRAB
 - DOMAIN-KEYWORD,zoom.us,AKRAB
