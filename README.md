@@ -14,7 +14,7 @@
 
 - cd
 
-# Edit vmess.yaml
+# Edit akun vmess.yaml
 - ketik nano .config/clash/proxy_provider/vmess.yaml
 
 -   name: "Vmess_Server"
@@ -32,7 +32,7 @@
 -     headers:
 -       Host: BUG_SNI
     
-# Edit trojan.yaml
+# Edit akun trojan.yaml
 - ketik nano .config/clash/proxy_provider/trojan.yaml
 
 -   name: "Trojan_Server"
@@ -45,18 +45,10 @@
 -   skip-cert-verify: true
     
 # Running Clash
-
 - Sebelum di running dahulukan lah, edit config
 - Command :
 - start Clash
 - clash ----> enter untuk menjalankan
-- vmess
-- nano .config/clash/proxy_provider/vmess.yaml
-
-- trojan
-- nano .config/clash/proxy_provider/trojan.yaml
-
-- Itu pun tergantung kepunyaan paket sc maupun server
 
 # Open Yacd-Dashboard
 - Buka Chrome
