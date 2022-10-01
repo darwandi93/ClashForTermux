@@ -59,7 +59,7 @@ unzip proxy_provider.zip
 echo ""
 
 sleep 2
-cd ClashForTermux
+cd
 sleep 2
 rm -r -f yacd-gh-pages.zip
 sleep 2
