@@ -1,0 +1,98 @@
+port: 7890
+socks-port: 7891
+#redir-port: 7892
+mixed-port: 7893
+#tproxy-port: 7895
+mode: global
+log-level: info
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret : ""
+bind-address: "*"
+external-ui: yacd-gh-pages
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: redir-host
+  listen: 127.0.0.1:7894
+  use-hosts: true
+  nameserver:
+    - https://cloudflare-dns.com/dns-query
+    - tls://1dot1dot1dot1.cloudflare-dns.com
+  fallback:
+    - https://dns.google/dns-query
+rule-providers:
+  DWD_Akrab:
+    type: file
+    behavior: classical
+    path: "./rule_provider/DWD_akrab.yaml"
+  DWD_Ads:
+    type: file
+    behavior: classical
+    path: "./rule_provider/DWD_ads.yaml"
+proxy-providers:
+  Vmess:
+    type: file
+    path: "./proxy_provider/vmess.yaml"
+    health-check:
+      enable: false
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  Trojan:
+    type: file
+    path: "./proxy_provider/trojan.yaml"
+    health-check:
+      enable: false
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+      
+#Gunakan tanda pagar menghiden, jika salah satu server tidak kepakai
+proxy-groups:
+- name: UNIVERSAL
+  type: select
+  disable-udp: false
+  proxies:
+    - LOADBALANCE
+    - BEST-PING
+- name: AKRAB
+  type: select
+  disable-udp: false
+  proxies:
+    - DIRECT
+    - LOADBALANCE
+    - BEST-PING 
+- name: ADBLOCK
+  type: select
+  disable-udp: false
+  proxies:
+    - REJECT
+    - LOADBALANCE
+    - BEST-PING
+  url: http://www.gstatic.com/generate_204
+- name: LOADBALANCE
+  type: load-balance
+  strategy: round-robin
+  disable-udp: false
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+  use:
+    - vmess
+  #- Trojan 
+- name: BEST-PING
+  type: url-test
+  disable-udp: false
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+  tolerance: '50'
+  use:
+    - vmess
+  #- Trojan 
+rules:
+- DST-PORT,7895,REJECT
+- DST-PORT,7892,REJECT
+- DST-PORT,7895,REJECT
+- DST-PORT,7892,REJECT
+- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+- RULE-SET,DWD_Akrab,AKRAB
+- RULE-SET,DWD_Ads,ADBLOCK
+- MATCH,GLOBAL
