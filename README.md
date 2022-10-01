@@ -8,14 +8,14 @@
 
 - apt install git -y
 
-- git clone https://github.com/lycoxz/ClashForTermux.git
+- git clone https://github.com/darwandi93/ClashForTermux.git
 
 - cd ClashForTermux && bash install.sh
 
 - cd
 
 # Edit vmess.yaml
-- ketik micro .config/clash/vmess.yaml
+- ketik micro .config/clash/proxy_provider/vmess.yaml
 
 -   name: "Vmess_Server"
 -   server: HOST_SERVER
@@ -33,7 +33,7 @@
 -       Host: BUG_SNI
     
 # Edit trojan.yaml
-- ketik micro .config/clash/trojan.yaml
+- ketik micro .config/clash/proxy_provider/trojan.yaml
 
 -   name: "Trojan_Server"
 -   type: trojan
@@ -49,10 +49,10 @@
 - Command :
 
 - vmess
-- micro .config/clash/vmess.yaml
+- micro .config/clash/proxy_provider/vmess.yaml
 
 - trojan
-- micro .config/clash/trojan.yaml
+- micro .config/clash/proxy_provider/trojan.yaml
 
 - Itupun tergantung kepunyaan paket sc maupun server
 
@@ -63,11 +63,11 @@
 # Setting IPTABLE Without Root
 - Buka pengaturan jaringan
 - masuk ke Access Point Names (APN)
-- APN : Bebas (Reccomended : internet)
+- APN : Bebas (Reccomended : internet/aha)
 - Proxy : 127.0.0.1
 - Port : 7890
 
 # Contact Me
 - Bila masih bingung bisa di tanyakan 
-- Facebook : https://www.facebook.com/LyCoXyZ
-- Whatsapp : https://wa.me/6283195323183
+- Youtube  : https://youtube.com/channel/UCEivnkOPZQsr8UzPmnH8a2w
+- Telegram : https://t.me/DWD_93
