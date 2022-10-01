@@ -15,7 +15,7 @@
 - cd
 
 # Edit vmess.yaml
-- ketik micro .config/clash/proxy_provider/vmess.yaml
+- ketik nano .config/clash/proxy_provider/vmess.yaml
 
 -   name: "Vmess_Server"
 -   server: HOST_SERVER
@@ -33,7 +33,7 @@
 -       Host: BUG_SNI
     
 # Edit trojan.yaml
-- ketik micro .config/clash/proxy_provider/trojan.yaml
+- ketik nano .config/clash/proxy_provider/trojan.yaml
 
 -   name: "Trojan_Server"
 -   type: trojan
@@ -49,12 +49,12 @@
 - Command :
 
 - vmess
-- micro .config/clash/proxy_provider/vmess.yaml
+- nano .config/clash/proxy_provider/vmess.yaml
 
 - trojan
-- micro .config/clash/proxy_provider/trojan.yaml
+- nano .config/clash/proxy_provider/trojan.yaml
 
-- Itupun tergantung kepunyaan paket sc maupun server
+- Itu pun tergantung kepunyaan paket sc maupun server
 
 # Open Yacd-Dashboard
 - Buka Chrome
