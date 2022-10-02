@@ -38,10 +38,6 @@ echo -e $b"➤ "$w" coppying proxy_provider: "$g"proxy"$w
 cp -r -f proxy_provider.zip $HOME/.config/clash
 echo ""
 
-echo -e $b"➤ "$w" coppying webui: "$g"webui"$w
-cp -r -f webui.zip $HOME/.config/clash
-echo ""
-
 sleep 2
 
 echo -e $b"➤ "$w" coppying config.yaml: "$g"config"$w
@@ -63,20 +59,11 @@ unzip proxy_provider.zip
 echo ""
 
 sleep 2
-
-cd $HOME/.config/clash
-echo -e $b"➤ "$w" extracting webui: "$g"webui"$w
-unzip webui.zip
-echo ""
-
-sleep 2
 cd
 sleep 2
 rm -r -f yacd-gh-pages.zip
 sleep 2
 rm -r -f proxy_provider.zip
-sleep 2
-rm -r -f webui.zip
 sleep 2
 cd
 rm -r -f ClashForTermux
