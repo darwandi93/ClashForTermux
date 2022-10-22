@@ -1,8 +1,5 @@
 # Clash For Termux Without Root
 
-# Tampilan
-[![Muhammad Quillen](https://i.ibb.co/9ckxPFK/275280701-1017928129071608-6754365807402039988-n.jpg)](https://www.facebook.com/LyCoXyZ/) 
-
 # Install
 - apt update && apt upgrade -y
 
