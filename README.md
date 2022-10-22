@@ -11,10 +11,10 @@
 
 - cd
 
-# Edit akun vmess.yaml
-- ketik nano .config/clash/proxy_provider/vmess.yaml
+# Edit akun vpn1.yaml
+- ketik nano .config/clash/proxy_provider/vpn1.yaml
 
--   name: "Vmess_Server"
+-   name: "vpn1"
 -   server: HOST_SERVER
 -   port: 443
 -   type: vmess
@@ -29,10 +29,10 @@
 -     headers:
 -       Host: BUG_SNI
     
-# Edit akun trojan.yaml
-- ketik nano .config/clash/proxy_provider/trojan.yaml
+# Edit akun vpn2.yaml
+- ketik nano .config/clash/proxy_provider/vpn2.yaml
 
--   name: "Trojan_Server"
+-   name: "vpn2"
 -   type: trojan
 -   server: HOST_SERVER
 -   port: 443
