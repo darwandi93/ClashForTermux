@@ -1,212 +1,185 @@
+---
+rule-providers:
+  DWD_Ads:
+    type: http
+    behavior: classical
+    path: "./DWD_rule/DWD_Ads.yaml"
+    url: https://raw.githubusercontent.com/dwd93/DWD_rule/main/DWD_Ads.yaml
+  DWD_Sosmed:
+    type: http
+    behavior: classical
+    path: "./DWD_rule/DWD_Sosmed.yaml"
+    url: https://raw.githubusercontent.com/dwd93/DWD_rule/main/DWD_Sosmed.yaml
+  DWD_Streaming:
+    type: http
+    behavior: classical
+    path: "./DWD_rule/DWD_Streaming.yaml"
+    url: https://raw.githubusercontent.com/dwd93/DWD_rule/main/DWD_Streaming.yaml
+  DWD_Gaming:
+    type: http
+    behavior: classical
+    path: "./DWD_rule/DWD_Gaming.yaml"
+    url: https://raw.githubusercontent.com/dwd93/DWD_rule/main/DWD_Gaming.yaml
+  DWD_Gaming_tcp:
+    type: http
+    behavior: classical
+    path: "./DWD_rule/DWD_Gaming_tcp.yaml"
+    url: https://raw.githubusercontent.com/dwd93/DWD_rule/main/DWD_Gaming_tcp.yaml
+  DWD_Gaming_udp:
+    type: http
+    behavior: classical
+    path: "./DWD_rule/DWD_Gaming_udp.yaml"
+    url: https://raw.githubusercontent.com/dwd93/DWD_rule/main/DWD_Gaming_udp.yaml
+  DWD_Akrab:
+    type: http
+    behavior: classical
+    path: "./DWD_rule/DWD_Akrab.yaml"
+    url: https://raw.githubusercontent.com/dwd93/DWD_rule/main/DWD_Akrab.yaml
+  DWD_Adguard:
+    type: http
+    behavior: domain
+    path: "./DWD_rule/DWD_Adguard.yaml"
+    url: https://raw.githubusercontent.com/dwd93/DWD_rule/main/DWD_Adguard.yaml
+  DWD_Traffic_Indo:
+    type: http
+    behavior: domain
+    path: "./DWD_rule/DWD_Indo.yaml"
+    url: https://raw.githubusercontent.com/dwd93/DWD_rule/main/DWD_Traffic_Indo.yaml
+  DWD_Speedtest:
+    type: http
+    behavior: domain
+    path: "./DWD_rule/DWD_Speedtest.yaml"
+    url: https://raw.githubusercontent.com/dwd93/DWD_rule/main/DWD_Speedtest.yaml
 port: 7890
 socks-port: 7891
-#redir-port: 7892
+redir-port: 7892
 mixed-port: 7893
-#tproxy-port: 7895
-mode: global
-log-level: info
+tproxy-port: 7895
+ipv6: false
+mode: rule
+log-level: silent
 allow-lan: true
 external-controller: 0.0.0.0:9090
-secret : ""
+secret: DWD
 bind-address: "*"
-external-ui: yacd-gh-pages
+unified-delay: true
+profile:
+  store-selected: true
 dns:
   enable: true
   ipv6: false
   enhanced-mode: redir-host
-  listen: 127.0.0.1:7894
-  use-hosts: true
+  listen: 0.0.0.0:7874
   nameserver:
-    - https://cloudflare-dns.com/dns-query
-    - tls://1dot1dot1dot1.cloudflare-dns.com
+  - 8.8.8.8
+  - 1.0.0.1
+  - https://dns.google/dns-query
   fallback:
-    - https://dns.google/dns-query
-proxy-providers:
-  Vmess:
-    type: file
-    path: "./proxy_provider/vmess.yaml"
-    health-check:
-      enable: false
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-  Trojan:
-    type: file
-    path: "./proxy_provider/trojan.yaml"
-    health-check:
-      enable: false
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-
-#Gunakan tanda pagar menghiden, jika salah satu server tidak kepakai
+  - 1.1.1.1
+  - 8.8.4.4
+  - https://cloudflare-dns.com/dns-query
+  - 112.215.203.254
+  default-nameserver:
+  - 8.8.8.8
+  - 1.1.1.1
+  - 112.215.203.254
 proxy-groups:
 - name: UNIVERSAL
   type: select
   disable-udp: false
   proxies:
-    - LOADBALANCE
-    - BEST-PING
+  - LOADBALANCE
+  - BEST-PING
+- name: GAME
+  type: select
+  disable-udp: false
+  proxies:
+  - DIRECT
+  - LOADBALANCE
+  - BEST-PING
+- name: SOSMED
+  type: select
+  disable-udp: false
+  proxies:
+  - LOADBALANCE
+  - BEST-PING
+- name: STREAMING
+  type: select
+  disable-udp: false
+  proxies:
+  - LOADBALANCE
+  - BEST-PING
 - name: AKRAB
   type: select
   disable-udp: false
   proxies:
-    - DIRECT
-    - LOADBALANCE
-    - BEST-PING
-  url: http://www.gstatic.com/generate_204
+  - DIRECT
+  - LOADBALANCE
+  - BEST-PING
+- name: ADBLOCK
+  type: select
+  disable-udp: false
+  proxies:
+  - REJECT
+  - LOADBALANCE
+  - BEST-PING
+- name: TRAFFIC INDO
+  type: select
+  disable-udp: false
+  use:
+  - VPN (1)
+  - VPN (2)
+- name: SPEEDTEST
+  type: select
+  disable-udp: false
+  proxies:
+  - LOADBALANCE
+  - BEST-PING
+  use:
+  - VPN (1)
+  - VPN (2)
 - name: LOADBALANCE
   type: load-balance
   strategy: round-robin
   disable-udp: false
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
   use:
-    - Vmess
-    - Trojan 
+  - VPN (1)
+  - VPN (2)
+  url: http://www.gstatic.com/generate_204
+  interval: '10'
 - name: BEST-PING
   type: url-test
   disable-udp: false
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
-  tolerance: '50'
   use:
-    - Vmess
-    - Trojan 
+  - VPN (1)
+  - VPN (2)
+  url: http://www.gstatic.com/generate_204
+  interval: '10'
+  tolerance: '150'
 rules:
-- DST-PORT,7895,REJECT
-- DST-PORT,7892,REJECT
-- DST-PORT,7895,REJECT
-- DST-PORT,7892,REJECT
-- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  # > WHATSAPP,AKRAB
-- DOMAIN-KEYWORD,whatsapp.com,AKRAB
-- DOMAIN-KEYWORD,whatsapp.net,AKRAB
-- DOMAIN-SUFFIX,g.whatsapp.net,AKRAB
-- DOMAIN-SUFFIX,web.whatsapp.com,AKRAB
-- DOMAIN-SUFFIX,scontent.whatsapp.net,AKRAB
-- DOMAIN-SUFFIX,whatsapp.com,AKRAB
-- DOMAIN-SUFFIX,static.whatsapp.net,AKRAB
-- DOMAIN-SUFFIX,mmg.whatsapp.net,AKRAB
-- DOMAIN-SUFFIX,media.fbdj2-1.fna.whatsapp.net,AKRAB
-- DOMAIN-SUFFIX,media-xsp1-2.cdn.whatsapp.net,AKRAB
-- DOMAIN,graph.facebook.com,AKRAB
-- DOMAIN-SUFFIX,bintray.com,AKRAB
-- DOMAIN-SUFFIX,whatsapp.biz,AKRAB
-- DOMAIN-SUFFIX,whatsapp.com,AKRAB
-- DOMAIN-KEYWORD,whatsapp,AKRAB
-- IP-CIDR,108.168.174.0/16,AKRAB
-- IP-CIDR,158.85.224.160/27,AKRAB
-- IP-CIDR,158.85.46.128/27,AKRAB
-- IP-CIDR,158.85.5.192/27,AKRAB
-- IP-CIDR,173.192.222.160/27,AKRAB
-- IP-CIDR,173.192.231.32/27,AKRAB
-- IP-CIDR,174.37.243.0/16,AKRAB
-- IP-CIDR,18.194.0.0/15,AKRAB
-- IP-CIDR,184.173.128.0/17,AKRAB
-- IP-CIDR,208.43.122.128/27,AKRAB
-- IP-CIDR,34.224.0.0/12,AKRAB
-- IP-CIDR,50.22.198.204/30,AKRAB
-- IP-CIDR,54.242.0.0/15,AKRAB
-- IP-CIDR,69.171.235.0/16,AKRAB
-- IP-CIDR,75.126.150.0/16,AKRAB
-- DST-PORT,5228,AKRAB
-- DST-PORT,5222,AKRAB
-- DST-PORT,38211,AKRAB
-  # > MICROSOFT,AKRAB
-- DOMAIN-SUFFIX,smartscreen-prod.microsoft.com,AKRAB
-- DOMAIN-SUFFIX,self.events.data.microsoft.com,AKRAB
-- DOMAIN-SUFFIX,nav.smartscreen.microsoft.com,AKRAB
-- DOMAIN-SUFFIX,edge.microsoft.com,AKRAB
-  # > RUANGGURU,AKRAB
-- DOMAIN-SUFFIX,ruangguru.com,AKRAB
-- DOMAIN-SUFFIX,belajar.ruangguru.com,AKRAB
-- DOMAIN-SUFFIX,midtrans.com,AKRAB
-- DOMAIN-SUFFIX,api.midtrans.com,AKRAB
-  # > ZOOM,AKRAB
-- DOMAIN-SUFFIX,zoom.us,AKRAB
-- DOMAIN-SUFFIX,google.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us02st1.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us03st1.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us04st1.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us02st2.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us03st2.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us04st2.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us02st3.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us03st3.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us04st3.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us02web.zoom.us,AKRAB
-- DOMAIN-SUFFIX,zoom.ada.support,AKRAB
-- DOMAIN-SUFFIX,st1.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us02zpns.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us04xmppapi.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us04st1.zoom.us,AKRAB
-- DOMAIN-SUFFIX,us04xmpp1.zoom.us,AKRAB
-- DOMAIN-SUFFIX,xmpp013.zoom.us,AKRAB
-- DOMAIN-SUFFIX,logfiles.zoom.us,AKRAB
-- DOMAIN-SUFFIX,cdn.zoom.us,AKRAB
-- DOMAIN-SUFFIX,zoom-general.s3.amazonaws.com,AKRAB
-- DOMAIN-SUFFIX,zoomca193-123-14-89mmr.cloud.zoom.us,AKRAB
-- DOMAIN-SUFFIX,zoomca193-123-1-56zc.cloud.zoom.us,AKRAB
-- DST-PORT,8801,AKRAB
-- DST-PORT,8802,AKRAB
-- DST-PORT,3478,AKRAB
-- DST-PORT,3479,AKRAB
-  # > AREA KHUSUS XL AKRAB
-
-  # > GOOGLE MEET, CLASSROOM, HANGOUTS, MAPS,AKRAB
-- DOMAIN-SUFFIX,meetings.googleapis.com,AKRAB
-- DOMAIN-SUFFIX,classroom.google.com,AKRAB
-- DOMAIN-SUFFIX,hangouts.googleapis.com,AKRAB
-  # MAPS,AKRAB
-- DOMAIN-SUFFIX,userlocation.googleapis.com,AKRAB
-- DOMAIN-SUFFIX,stun.l.google.com,AKRAB
-- DOMAIN-SUFFIX,instantmessaging-pa.googleapis.com,AKRAB
-- DOMAIN-SUFFIX,mtalk.google.com,AKRAB
-- DOMAIN-SUFFIX,mobilemaps.googleapis.com,AKRAB
-- DOMAIN-SUFFIX,mobilemaps-pa-gz.googleapis.com,AKRAB
-- DOMAIN-SUFFIX,clients4.google.com,AKRAB
-- DOMAIN-SUFFIX,android.googleapis.com,AKRAB
-- DOMAIN-SUFFIX,safebrowsing.googleapis.com,AKRAB
-- DOMAIN-SUFFIX,lh3.googleusercontent.com,AKRAB
-- DOMAIN-SUFFIX,lh5.googleusercontent.com,AKRAB
-- DOMAIN-SUFFIX,apis.google.com,AKRAB
-- DOMAIN-SUFFIX,peoplestack-pa.googleapis.com,AKRAB
-- DOMAIN-SUFFIX,gz0.googleusercontent.com,AKRAB
-- DOMAIN-SUFFIX,geoar.googleapis.com,AKRAB
-- DOMAIN-SUFFIX,streetviewpixels-pa.googleapis.com,AKRAB
-- DOMAIN-SUFFIX,maps.gstatic.com,AKRAB
-- DOMAIN-SUFFIX,maps.google.com,AKRAB
-- DOMAIN-SUFFIX,optimizationguide-pa.googleapis.com,AKRAB
-  # CLASSROOM,AKRAB
-- DOMAIN-SUFFIX,dns.google,AKRAB
-- DOMAIN-SUFFIX,clients3.google.com,AKRAB
-- DOMAIN-SUFFIX,notifications-pa.googleapis.com,AKRAB
-  # PORTS,AKRAB
-- DST-PORT,19302,AKRAB
-- DST-PORT,19305,AKRAB
-  # > Microsoft Teams,AKRAB
-- DOMAIN,teams.events.data.microsoft.com,AKRAB
-- DOMAIN-SUFFIX,teams.cdn.live.net,AKRAB
-- DOMAIN-SUFFIX,teams.live.com,AKRAB
-- DOMAIN-SUFFIX,teams.microsoft.com,AKRAB
-  # > Campuran,AKRAB
-- DOMAIN-KEYWORD,zoom.us,AKRAB
-- DOMAIN-KEYWORD,meet.google.com,AKRAB
-- DOMAIN-KEYWORD,ruangguru.com,AKRAB
-- DOMAIN-KEYWORD,zenius.com,AKRAB
-- DOMAIN-KEYWORD,office.com,AKRAB
-- DOMAIN-KEYWORD,trouter.io,AKRAB
-- DOMAIN-KEYWORD,skype.com,AKRAB
-- DOMAIN-KEYWORD,skype.net,AKRAB
-- DOMAIN-KEYWORD,cortana.ai,AKRAB
-- DOMAIN-KEYWORD,customspeech.ai,AKRAB
-- DOMAIN-KEYWORD,bing.com,AKRAB
-- DOMAIN-KEYWORD,microsoft.com,AKRAB
-- DOMAIN-KEYWORD,hivestreaming.com,AKRAB
-- DOMAIN-KEYWORD,kollective.app,AKRAB
-- DOMAIN-KEYWORD,kollectivecd.com,AKRAB
-- DOMAIN-KEYWORD,office365.us,AKRAB
-- DOMAIN-KEYWORD,live.com,AKRAB
-- DOMAIN-KEYWORD,svc.ms,AKRAB
-- DOMAIN-KEYWORD,office.com,AKRAB
-- DOMAIN-KEYWORD,officeppe.com,AKRAB
+- RULE-SET,DWD_Adguard,ADBLOCK
+- RULE-SET,DWD_Ads,ADBLOCK
+- RULE-SET,DWD_Akrab,AKRAB
+- RULE-SET,DWD_Gaming,GAME
+- RULE-SET,DWD_Gaming_tcp,GAME
+- RULE-SET,DWD_Gaming_udp,GAME
+- RULE-SET,DWD_Sosmed,SOSMED
+- RULE-SET,DWD_Streaming,STREAMING
+- RULE-SET,DWD_Traffic_Indo,TRAFFIC INDO
+- RULE-SET,DWD_Speedtest,SPEEDTEST
 - MATCH,GLOBAL
+proxy-providers:
+  VPN (1):
+    type: file
+    path: "./proxy_provider/vpn1.yaml"
+    health-check:
+      enable: false
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  VPN (2):
+    type: file
+    path: "./proxy_provider/vpn2.yaml"
+    health-check:
+      enable: false
+      url: http://www.gstatic.com/generate_204
+      interval: 300
