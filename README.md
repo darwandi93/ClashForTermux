@@ -43,9 +43,7 @@
     
 # Running Clash
 - Sebelum di running dahulukan lah, edit config
-- Command :
-- start Clash
-- clash ----> enter untuk menjalankan
+- ketik "clash" tanpa tanda petik lalu enter untuk menjalankan
 
 # Open Yacd-Dashboard
 - Buka Chrome
