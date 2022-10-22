@@ -40,6 +40,12 @@ echo ""
 
 sleep 2
 
+echo -e $b"➤ "$w" coppying proxy_provider: "$g"proxy"$w
+cp -r -f rule_provider.zip $HOME/.config/clash
+echo ""
+
+sleep 2
+
 echo -e $b"➤ "$w" coppying config.yaml: "$g"config"$w
 cp -r -f config.yaml $HOME/.config/clash
 echo ""
@@ -64,6 +70,8 @@ sleep 2
 rm -r -f yacd-gh-pages.zip
 sleep 2
 rm -r -f proxy_provider.zip
+sleep 2
+rm -r -f rule_provider.zip
 sleep 2
 cd
 rm -r -f ClashForTermux
