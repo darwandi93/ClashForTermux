@@ -40,7 +40,7 @@ echo ""
 
 sleep 2
 
-echo -e $b"➤ "$w" coppying proxy_provider: "$g"proxy"$w
+echo -e $b"➤ "$w" coppying proxy_provider: "$g"rule"$w
 cp -r -f rule_provider.zip $HOME/.config/clash
 echo ""
 
@@ -62,6 +62,13 @@ sleep 2
 cd $HOME/.config/clash
 echo -e $b"➤ "$w" extracting proxy_provider: "$g"proxy"$w
 unzip proxy_provider.zip
+echo ""
+
+sleep 2
+
+cd $HOME/.config/clash
+echo -e $b"➤ "$w" extracting proxy_provider: "$g"rule"$w
+unzip rule_provider.zip
 echo ""
 
 sleep 2
